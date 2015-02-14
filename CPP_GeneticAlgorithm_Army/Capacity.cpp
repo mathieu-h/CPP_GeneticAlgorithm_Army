@@ -4,3 +4,6 @@
 
 
 
+Capacity::~Capacity()
+{
+}
