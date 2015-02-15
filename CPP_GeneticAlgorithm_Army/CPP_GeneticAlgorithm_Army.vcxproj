@@ -79,6 +79,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArmyUnit.h" />
     <ClInclude Include="Capacity.h" />
     <ClInclude Include="Cap_Armor.h" />
     <ClInclude Include="Cap_Damage.h" />
@@ -87,10 +88,12 @@
     <ClInclude Include="Cap_Range.h" />
     <ClInclude Include="Cap_Speed.h" />
     <ClInclude Include="Cap_WeaponSpeed.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArmyUnit.cpp" />
     <ClCompile Include="Capacity.cpp" />
     <ClCompile Include="Cap_Armor.cpp" />
     <ClCompile Include="Cap_Damage.cpp" />
@@ -100,6 +103,7 @@
     <ClCompile Include="Cap_Speed.cpp" />
     <ClCompile Include="Cap_WeaponSpeed.cpp" />
     <ClCompile Include="CPP_GeneticAlgorithm_Army.cpp" />
+    <ClCompile Include="Point.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

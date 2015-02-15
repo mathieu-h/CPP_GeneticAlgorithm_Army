@@ -20,7 +20,7 @@ public:
 		return _value;
 	}
 
-	virtual void updateValue();
+	virtual void updateValue() = 0;
 
 	void upgrade(){
 		_level += 1;

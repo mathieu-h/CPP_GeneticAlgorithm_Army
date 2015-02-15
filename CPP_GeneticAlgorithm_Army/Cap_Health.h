@@ -11,7 +11,7 @@ public:
 	}
 
 	void updateValue(){
-		_maxLife = (1 + _level) * 10;
+		_maxLife = (float)((1 + _level) * 10);
 	}
 
 	// add method to update _value
