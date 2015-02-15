@@ -8,9 +8,6 @@ public:
 	// destructed since you don't know which destroyer you should call
 	virtual ~Capacity();
 
-	// const is useless here actually since it's a float
-	// virtual const float getValue() = 0;
-	
 	int getLevel() const
 	{
 		return _level;
@@ -20,6 +17,7 @@ public:
 		return _value;
 	}
 
+	// must be pure virtual since each child has it's own implementation
 	virtual void updateValue() = 0;
 
 	void upgrade(){
@@ -31,6 +29,7 @@ public:
 		_level -= 1;
 		updateValue();
 	}
+
 protected:
 	int _level;
 	float _value;

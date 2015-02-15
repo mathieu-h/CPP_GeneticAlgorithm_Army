@@ -12,20 +12,32 @@
 
 class ArmyUnit
 {
+
 public:
-	ArmyUnit();
+	ArmyUnit(int globalLevel);
+	//ArmyUnit(int globalLevel);
 	~ArmyUnit();
 
-	Cap_Armor& getArmor();
-	Cap_Damage& getDamage();
-	Cap_Health& getHealth();
-	Cap_HealthRegen& getHealthRegen();
-	Cap_Range& getRange();
-	Cap_Speed& getSpeed();
-	Cap_WeaponSpeed& getWeaponSpeed();
+	const Cap_Armor& getArmor(){ return _armor; };
+	const Cap_Damage& getDamage(){ return _damage; };
+	const Cap_Health& getHealth() { return _health; };
+	const Cap_HealthRegen& getHealthRegen(){ return _healthRegen; };
+	const Cap_Range& getRange(){ return _range; };
+	const Cap_Speed& getSpeed(){ return _speed; };
+	const Cap_WeaponSpeed& getWeaponSpeed(){ return _weaponSpeed; };
 
 	int getLevel();
-	Point getPosition();
+	Point getPosition(){ return _position; };
+	int getId(){ return _id; };
+
+	void setPosition();
+	void refresh();
+	bool shoot();
+	void takeDamage(float value);
+	bool isAlive();
+
+	Capacity& operator[](int index);
+	
 
 private:
 	int _id;
@@ -36,5 +48,6 @@ private:
 	Cap_Range _range;
 	Cap_Speed _speed;
 	Cap_WeaponSpeed _weaponSpeed;
+	Point _position;
 };
 
