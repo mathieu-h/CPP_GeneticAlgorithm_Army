@@ -9,7 +9,7 @@ public:
 	virtual ~Capacity();
 
 	// const is useless here actually since it's a float
-	virtual const float getValue() = 0;
+	// virtual const float getValue() = 0;
 	
 	int getLevel() const
 	{
