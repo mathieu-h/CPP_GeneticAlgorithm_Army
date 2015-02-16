@@ -10,13 +10,13 @@
 #include <math.h>
 #include "Point.h"
 
-class ArmyUnit
+class Unit
 {
 
 public:
-	ArmyUnit(int globalLevel);
+	Unit(int globalLevel);
 	//ArmyUnit(int globalLevel);
-	~ArmyUnit();
+	~Unit();
 
 	const Cap_Armor& getArmor(){ return _armor; };
 	const Cap_Damage& getDamage(){ return _damage; };
@@ -30,7 +30,7 @@ public:
 	Point getPosition(){ return _position; };
 	int getId(){ return _id; };
 
-	void setPosition();
+	void setPosition(Point& position);
 	void refresh();
 	bool shoot();
 	void takeDamage(float value);

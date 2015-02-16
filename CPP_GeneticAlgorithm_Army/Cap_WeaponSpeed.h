@@ -15,7 +15,18 @@ public:
 		_maxReloadTime = (float)(1000/_level+1);
 	}
 
-	// add method to update currentValue  
+	/*
+	void setValue(float value){
+		_value = value;
+	} 
+	*/
+	void resetValue(){
+		_value = _maxReloadTime;
+	}
+
+	void decrementReloadTime(){
+		_value -= 1;
+	}
 
 private:
 	float _maxReloadTime;

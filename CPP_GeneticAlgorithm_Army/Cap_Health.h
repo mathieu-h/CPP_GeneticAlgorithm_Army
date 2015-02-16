@@ -16,6 +16,17 @@ public:
 
 	// add method to update _value
 
+	void setValue(float value){
+		_value = value;
+	}
+
+	void takeDamage(float value){
+		_value -= value;
+	}
+
+	void resetValue(){
+		_value = _maxLife;
+	}
 private:
 	float _maxLife;
 };

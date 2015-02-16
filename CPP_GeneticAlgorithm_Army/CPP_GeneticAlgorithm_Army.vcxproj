@@ -79,6 +79,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Army.h" />
     <ClInclude Include="ArmyUnit.h" />
     <ClInclude Include="Capacity.h" />
     <ClInclude Include="Cap_Armor.h" />
@@ -93,6 +94,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Army.cpp" />
     <ClCompile Include="ArmyUnit.cpp" />
     <ClCompile Include="Capacity.cpp" />
     <ClCompile Include="Cap_Armor.cpp" />
