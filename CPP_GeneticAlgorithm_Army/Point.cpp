@@ -25,6 +25,12 @@ std::ostream& operator<<(std::ostream& out, const Point &p)
     return out;
 }
 
+double Point::distance(const Point &P) const
+{
+    double dx = this->x_ - P.x_;
+    double dy = this->y_ - P.y_;
+    return sqrt(dx*dx + dy*dy); 
+}
 
 float Point::x_get() const
 {

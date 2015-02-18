@@ -19,6 +19,8 @@ public:
     void x_set(float x);
     float y_get() const;
     void y_set(float y);
+
+	double distance(const Point &P) const;
     
 };
 

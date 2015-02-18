@@ -80,7 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Army.h" />
-    <ClInclude Include="ArmyUnit.h" />
+    <ClInclude Include="Unit.h" />
     <ClInclude Include="Capacity.h" />
     <ClInclude Include="Cap_Armor.h" />
     <ClInclude Include="Cap_Damage.h" />
@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Army.cpp" />
-    <ClCompile Include="ArmyUnit.cpp" />
+    <ClCompile Include="Unit.cpp" />
     <ClCompile Include="Capacity.cpp" />
     <ClCompile Include="Cap_Armor.cpp" />
     <ClCompile Include="Cap_Damage.cpp" />

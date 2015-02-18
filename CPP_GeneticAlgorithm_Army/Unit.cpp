@@ -46,6 +46,14 @@ bool Unit::isAlive(){
 	}
 }
 
+int Unit::getLevel(){
+	int globalLevel = 0;
+	for (int i = 0; i <= 6; i++){
+		globalLevel += this[i].getLevel();
+	}
+	return globalLevel;
+}
+
 Capacity& Unit::operator[](int index){
 	switch (index){
 		case 0:
@@ -63,6 +71,7 @@ Capacity& Unit::operator[](int index){
 		case 6:
 			return _weaponSpeed;
 		default:
+			return _speed;
 			break;
 	}
 }
