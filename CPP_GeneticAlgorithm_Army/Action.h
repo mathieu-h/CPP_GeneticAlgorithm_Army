@@ -8,7 +8,6 @@ public:
 	~Action();
 
 	std::string getType() const { return _type; }
-
 protected:
 	std::string _type;
 };

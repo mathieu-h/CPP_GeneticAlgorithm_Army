@@ -5,7 +5,10 @@
 class ActionMove : public Action
 {
 public:
-	ActionMove() : _type("Move"){};
+	ActionMove() {
+		_type = "Move";
+	};
+
 	~ActionMove();
 
 	Point getNextPosition() const { return _nextPosition; }

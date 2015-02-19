@@ -13,10 +13,7 @@ public:
 	IA(std::string aiCode) : _aiCode(aiCode){}
 	~IA();
 
-	Action operator() (Unit* unit, Army armyOne, Army armyTwo)
-	{
-		
-	}
+	Action operator() (Unit* unit, Army armyOne, Army armyTwo);
 
 private:
 	/*

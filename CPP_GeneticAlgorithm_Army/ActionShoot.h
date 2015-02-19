@@ -2,10 +2,12 @@
 #include "Action.h"
 #include "Unit.h"
 
-class ActionShoot
+class ActionShoot : Action
 {
 public:
-	ActionShoot();
+	ActionShoot() {
+		_type = "Shoot";
+	};
 	~ActionShoot();
 
 private:
