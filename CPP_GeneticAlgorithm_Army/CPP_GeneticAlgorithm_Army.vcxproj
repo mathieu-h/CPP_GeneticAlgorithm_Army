@@ -80,6 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionMove.h" />
+    <ClInclude Include="ActionShoot.h" />
     <ClInclude Include="Army.h" />
     <ClInclude Include="IA.h" />
     <ClInclude Include="Unit.h" />
@@ -97,6 +99,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionMove.cpp" />
+    <ClCompile Include="ActionShoot.cpp" />
     <ClCompile Include="Army.cpp" />
     <ClCompile Include="IA.cpp" />
     <ClCompile Include="Unit.cpp" />
