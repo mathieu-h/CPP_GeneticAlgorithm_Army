@@ -5,7 +5,7 @@
 class ActionMove : public Action
 {
 public:
-	ActionMove() {
+	ActionMove(Point& nextPosition) : _nextPosition(nextPosition) {
 		_type = "Move";
 	};
 

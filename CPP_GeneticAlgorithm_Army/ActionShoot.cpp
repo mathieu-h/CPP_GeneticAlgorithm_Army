@@ -2,7 +2,3 @@
 #include "ActionShoot.h"
 
 
-
-ActionShoot::~ActionShoot()
-{
-}

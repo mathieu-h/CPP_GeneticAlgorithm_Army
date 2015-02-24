@@ -4,6 +4,8 @@
 #include "Unit.h"
 #include "Capacity.h"
 #include "Action.h"
+#include "ActionMove.h"
+#include "ActionShoot.h"
 #include <string>
 
 class IA
@@ -13,8 +15,8 @@ public:
 	IA(std::string aiCode) : _aiCode(aiCode){}
 	~IA();
 
-	Action operator() (Unit* unit, Army armyOne, Army armyTwo); 
-	Unit* chooseTarget(Army armyOppopent) const;
+	Action& operator() (Unit* unit, Army armyOne, Army armyTwo); 
+	Unit* chooseTarget(Army armyOpponent) const;
 
 private:
 	/*

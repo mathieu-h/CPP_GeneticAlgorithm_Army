@@ -2,7 +2,3 @@
 #include "ActionMove.h"
 
 
-
-ActionMove::~ActionMove()
-{
-}
