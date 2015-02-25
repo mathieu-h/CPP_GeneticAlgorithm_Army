@@ -9,13 +9,13 @@
 #include "Cap_WeaponSpeed.h"
 #include <math.h>
 #include "Point.h"
+#include <vector>
 
 class Unit
 {
-
 public:
 	Unit(int globalLevel);
-	//ArmyUnit(int globalLevel);
+	Unit(IACode iaCode, std::vector<int> levels);
 	~Unit();
 
 	const Cap_Armor& getArmor(){ return _armor; };
@@ -27,8 +27,9 @@ public:
 	const Cap_WeaponSpeed& getWeaponSpeed(){ return _weaponSpeed; };
 
 	int getLevel();
-	Point getPosition(){ return _position; };
-	int getId(){ return _id; };
+	Point getPosition() const{ return _position; };
+	//int getId() const { return _id; };
+	IACode getIACode() const{ return _iaCode; };
 
 	void setPosition(Point& position);
 	void refresh();
@@ -37,10 +38,11 @@ public:
 	bool isAlive();
 
 	Capacity& operator[](int index);
-	
+
+	static int _idCounter;
 
 private:
-	int _id;
+	//int _id;
 	Cap_Armor _armor;
 	Cap_Damage _damage;
 	Cap_Health _health;
@@ -49,5 +51,6 @@ private:
 	Cap_Speed _speed;
 	Cap_WeaponSpeed _weaponSpeed;
 	Point _position;
+	IACode _iaCode;
 };
 

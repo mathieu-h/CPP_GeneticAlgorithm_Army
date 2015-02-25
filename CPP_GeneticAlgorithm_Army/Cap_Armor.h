@@ -7,7 +7,8 @@ public:
 
 	void updateValue()
 	{
-		_value = (float)_level * 2;
+		//_value = (float)_level * 2; oldval
+		_value = (float)_level / 2;
 	}
 };
 

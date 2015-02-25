@@ -1,14 +1,16 @@
 #pragma once
 #include <string>
 
+enum A_TYPE { MOVE, SHOOT };
+
 class Action
 {
 public:
 	Action();
 	~Action();
 
-	std::string getType() const { return _type; }
+	A_TYPE getType() const { return _type; }
 protected:
-	std::string _type;
+	A_TYPE _type;
 };
 

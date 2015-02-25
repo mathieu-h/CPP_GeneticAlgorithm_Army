@@ -4,10 +4,25 @@
 
 Unit::Unit(int globalLevel)
 {
-	//set random IA code
-	//distribute level among capacities
+	//set random IA code	
+	_iaCode = (IACode)(rand() % 15);
+	//distribute level among capacities randomly
+	for (int i = 0; i < globalLevel; i++){
+		((*this)[rand() % 7]).upgrade();
+	}
+	//_id = ++Unit::_idCounter;
 }
 
+Unit::Unit(IACode iaCode, std::vector<int> levels)
+{
+	//set random IA code	
+	_iaCode = iaCode;
+	//distribute level among capacities with the given vector of levels
+	for (int i = 0; i < levels.size(); i++){
+		((*this)[i]).upgrade(levels[i]);
+	}
+	//_id = ++Unit::_idCounter;
+}
 
 Unit::~Unit()
 {
@@ -49,7 +64,7 @@ bool Unit::isAlive(){
 int Unit::getLevel(){
 	int globalLevel = 0;
 	for (int i = 0; i <= 6; i++){
-		globalLevel += this[i].getLevel();
+		globalLevel += ((*this)[i]).getCLevel();
 	}
 	return globalLevel;
 }

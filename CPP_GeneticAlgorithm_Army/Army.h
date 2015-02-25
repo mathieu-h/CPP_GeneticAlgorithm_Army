@@ -4,6 +4,7 @@
 #include "Capacity.h"
 #include <vector>
 
+
 class Army
 {
 public:
@@ -17,13 +18,17 @@ public:
 	}
 
 	Unit& getNearestUnit(const Point& p);
-	Unit& getFurtherUnit(const Point& p);
+	Unit& getFurthestUnit(const Point& p);
 	Unit& getLowestUnit(int capa_index);
 	Unit& getHighestUnit(int capa_index);
 
 
 	int size() const {
 		return _unitList.size();
+	}
+
+	bool isEmpty(){
+		return _unitList.size() == 0;
 	}
 
 	void purge();

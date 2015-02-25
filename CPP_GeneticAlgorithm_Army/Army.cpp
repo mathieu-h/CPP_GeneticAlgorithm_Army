@@ -5,7 +5,8 @@
 
 Army::Army(int numberOfUnits, int level){
 	for (int i = 0; i < numberOfUnits; ++i){
-		_unitList.push_back(new Unit(level));
+		Unit* newUnit = new Unit(level);
+		_unitList.push_back(newUnit);
 	}
 }
 
@@ -14,7 +15,7 @@ Army::Army(std::vector<Unit*>& unitList){
 	_unitList = unitList;
 }
 
-Unit& Army::getNearestUnit(const Point& p){
+Unit& Army::getNearestUnit(const Point& p) {
 	Unit* currentUnit;
 	Unit* currentNearestUnit = new Unit(1000);
 	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
@@ -26,7 +27,7 @@ Unit& Army::getNearestUnit(const Point& p){
 	return *currentNearestUnit;
 }
 
-Unit& Army::getFurtherUnit(const Point& p){
+Unit& Army::getFurthestUnit(const Point& p) {
 	Unit* currentUnit;
 	Unit* currentFurthestUnit = new Unit(1000);
 	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
@@ -38,24 +39,24 @@ Unit& Army::getFurtherUnit(const Point& p){
 	return *currentFurthestUnit;
 }
 
-Unit& Army::getLowestUnit(int capa_index){
-	Unit* currentUnit;
-	Unit* currentLowestUnit = new Unit(1000);
+Unit& Army::getLowestUnit(int capa_index) {
+	Unit currentUnit = Unit(1);
+	Unit currentLowestUnit = Unit(1000);
 	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
-		currentUnit = *it;
-		if (currentUnit[capa_index].getLevel() < currentLowestUnit[capa_index].getLevel()){
+		currentUnit = *(*it);
+		if (currentUnit[capa_index].getCLevel() < currentLowestUnit[capa_index].getCLevel()){
 			currentLowestUnit = currentUnit;
 		}
 	}
-	return *currentLowestUnit;
+	return currentLowestUnit;
 }
 
 Unit& Army::getHighestUnit(int capa_index){
 	Unit* currentUnit;
 	Unit* currentBestUnit = new Unit(0);
 	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
-		currentUnit = *it;
-		if (currentUnit[capa_index].getLevel() > currentBestUnit[capa_index].getLevel()){
+		currentUnit = (*it);
+		if ((*currentUnit)[capa_index].getCLevel() > (*currentBestUnit)[capa_index].getCLevel()){
 			currentBestUnit = currentUnit;
 		}
 	}

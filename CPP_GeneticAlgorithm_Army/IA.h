@@ -8,15 +8,18 @@
 #include "ActionShoot.h"
 #include <string>
 
+
 class IA
 {
 public:
+	IA(){};
 	//IA(Unit* unit, Army armyOne, Army armyTwo) : _unit(unit), _armyOne(_armyOne), _armyTwo(_armyTwo) {};
-	IA(std::string aiCode) : _aiCode(aiCode){}
+	//IA() : _aiCode(LD){}
+	//IA(IACode aiCode) : _aiCode(aiCode){}
 	~IA();
 
-	Action& operator() (Unit* unit, Army armyOne, Army armyTwo); 
-	Unit* chooseTarget(Army armyOpponent) const;
+	Action& operator() (Unit& unit, Army& armyOne, Army& armyTwo);
+	Unit& chooseTarget(Unit& unit, Army& armyOpponent);
 
 private:
 	/*
@@ -24,6 +27,6 @@ private:
 	Army _armyOne;
 	Army _armyTwo;
 	*/
-	std::string _aiCode;
+	//IACode _aiCode;
 };
 

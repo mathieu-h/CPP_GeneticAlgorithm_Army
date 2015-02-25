@@ -12,7 +12,7 @@ public:
 	}
 
 	void updateValue(){
-		_maxReloadTime = (float)(1000/_level+1);
+		_maxReloadTime = (float)(1000/(_level+1));
 	}
 
 	/*
