@@ -9,12 +9,12 @@ public:
 		_type = SHOOT;
 	};
 	~ActionShoot();
-	/*
+	
 	int getUnitID() const
 	{
 		return _target.getId();
 	}
-	*/
+	
 	Unit& getTarget() 
 	{
 		return _target;

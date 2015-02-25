@@ -11,9 +11,11 @@
 #include "Point.h"
 #include <vector>
 
+
 class Unit
 {
 public:
+	static int _idCounter;
 	Unit(int globalLevel);
 	Unit(IACode iaCode, std::vector<int> levels);
 	~Unit();
@@ -28,21 +30,21 @@ public:
 
 	int getLevel();
 	Point getPosition() const{ return _position; };
-	//int getId() const { return _id; };
+	int getId() const { return _id; };
 	IACode getIACode() const{ return _iaCode; };
 
 	void setPosition(Point& position);
 	void refresh();
 	bool shoot();
+	bool canShoot() const;
 	void takeDamage(float value);
 	bool isAlive();
 
 	Capacity& operator[](int index);
 
-	static int _idCounter;
 
 private:
-	//int _id;
+	int _id;
 	Cap_Armor _armor;
 	Cap_Damage _damage;
 	Cap_Health _health;
@@ -53,4 +55,3 @@ private:
 	Point _position;
 	IACode _iaCode;
 };
-

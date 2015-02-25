@@ -9,12 +9,12 @@ IA::~IA()
 
 Action& IA::operator() (Unit& unit, Army& armyOne, Army& armyTwo){
 	// teste si l'unit courante peut tirer
-	if (unit.shoot()){
+	if (unit.canShoot()){
 		// si oui, choisir sa cible en fonction du code ia
 		Unit enemy = chooseTarget(unit, armyTwo);
 		// si la cible est à portée => tirer desssus		
 		if (enemy.getPosition().distance(unit.getPosition()) < unit.getRange().getValue()){
-			//enemy->takeDamage(unit.getDamage().getValue());			
+			//enemy.takeDamage(unit.getDamage().getValue());
 			return *new ActionShoot(enemy);
 		}
 

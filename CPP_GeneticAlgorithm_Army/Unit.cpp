@@ -10,7 +10,7 @@ Unit::Unit(int globalLevel)
 	for (int i = 0; i < globalLevel; i++){
 		((*this)[rand() % 7]).upgrade();
 	}
-	//_id = ++Unit::_idCounter;
+	_id = ++_idCounter;
 }
 
 Unit::Unit(IACode iaCode, std::vector<int> levels)
@@ -21,7 +21,7 @@ Unit::Unit(IACode iaCode, std::vector<int> levels)
 	for (int i = 0; i < levels.size(); i++){
 		((*this)[i]).upgrade(levels[i]);
 	}
-	//_id = ++Unit::_idCounter;
+	_id = ++_idCounter;
 }
 
 Unit::~Unit()
@@ -30,12 +30,12 @@ Unit::~Unit()
 
 void Unit::refresh(){
 	_health.updateValue();
-	_health.setValue(_health.getValue() + _healthRegen.getValue());
+	//_health.setValue(_health.getValue() + _healthRegen.getValue());
 	_weaponSpeed.decrementReloadTime();
 }
 
 bool Unit::shoot(){
-	if (_weaponSpeed.getValue() == 0){
+	if (_weaponSpeed.getValue() <= 0){
 		_weaponSpeed.resetValue();
 		return true;
 	}
@@ -44,8 +44,19 @@ bool Unit::shoot(){
 	}
 }
 
+
+bool Unit::canShoot() const{
+	if (_weaponSpeed.getValue() <= 0){
+		//_weaponSpeed.resetValue();
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 void Unit::takeDamage(float damageValue){
-	_health.setValue(damageValue-_armor.getValue());
+	_health.takeDamage(damageValue-_armor.getValue());
 }
 
 void Unit::setPosition(Point& position){

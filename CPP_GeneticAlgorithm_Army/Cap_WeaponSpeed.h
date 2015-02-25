@@ -12,7 +12,7 @@ public:
 	}
 
 	void updateValue(){
-		_maxReloadTime = (float)(1000/(_level+1));
+		_maxReloadTime = (float)(100/(_level+1));
 	}
 
 	/*
@@ -25,7 +25,7 @@ public:
 	}
 
 	void decrementReloadTime(){
-		_value -= 1;
+		if(_value!=0) _value -= 1;
 	}
 
 private:

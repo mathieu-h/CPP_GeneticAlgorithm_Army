@@ -17,7 +17,9 @@ Army::Army(std::vector<Unit*>& unitList){
 
 Unit& Army::getNearestUnit(const Point& p) {
 	Unit* currentUnit;
-	Unit* currentNearestUnit = new Unit(1000);
+	Unit* currentNearestUnit = new Unit(10);
+	// I set the nearestUnit at the given position so i'm sure it's the closest possible
+	currentNearestUnit->setPosition(Point(p));
 	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
 		currentUnit = *it;
 		if (currentUnit->getPosition().distance(p) < currentNearestUnit->getPosition().distance(p)){
@@ -29,7 +31,9 @@ Unit& Army::getNearestUnit(const Point& p) {
 
 Unit& Army::getFurthestUnit(const Point& p) {
 	Unit* currentUnit;
-	Unit* currentFurthestUnit = new Unit(1000);
+	Unit* currentFurthestUnit = new Unit(10);	
+	// I assume p(999,999) is pretty far
+	currentFurthestUnit->setPosition(Point(999,999));
 	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
 		currentUnit = *it;
 		if (currentUnit->getPosition().distance(p) > currentFurthestUnit->getPosition().distance(p)){
@@ -40,15 +44,15 @@ Unit& Army::getFurthestUnit(const Point& p) {
 }
 
 Unit& Army::getLowestUnit(int capa_index) {
-	Unit currentUnit = Unit(1);
-	Unit currentLowestUnit = Unit(1000);
+	Unit* currentUnit;
+	Unit* currentLowestUnit = new Unit(1000);
 	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
-		currentUnit = *(*it);
-		if (currentUnit[capa_index].getCLevel() < currentLowestUnit[capa_index].getCLevel()){
+		currentUnit = (*it);
+		if ((*currentUnit)[capa_index].getCLevel() < (*currentLowestUnit)[capa_index].getCLevel()){
 			currentLowestUnit = currentUnit;
 		}
 	}
-	return currentLowestUnit;
+	return *currentLowestUnit;
 }
 
 Unit& Army::getHighestUnit(int capa_index){
@@ -67,9 +71,32 @@ void Army::purge(){
 	Unit* currentUnit;
 	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
 		currentUnit = *it;
-		if (currentUnit->getHealth().getValue() <= 0){
+		if (!currentUnit->isAlive()){
 			_unitList.erase(it);
 		}
+		else
+		{
+			currentUnit->refresh();
+		}
+	}
+}
+
+void Army::refreshUnits(){
+	Unit* currentUnit;
+	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
+		currentUnit = *it;
+		currentUnit->refresh();
+	}
+}
+
+
+void Army::setArmyInFormation(float verticalOrigin){
+	float horizontalOrigin = 0;
+	Unit* currentUnit;
+	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
+		currentUnit = *it;
+		currentUnit->setPosition(Point(horizontalOrigin, verticalOrigin));
+		horizontalOrigin += 10;
 	}
 }
 
