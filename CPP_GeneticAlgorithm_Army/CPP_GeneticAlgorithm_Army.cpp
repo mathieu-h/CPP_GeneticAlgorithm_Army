@@ -29,9 +29,6 @@ void executeAction(Action& action, Unit& currentUnit,Army& army, int currentArmy
 		//currentArmy == A1 ? opponentArmy = A2 : opponentArmy = A1;
 		int targetID = static_cast<ActionShoot&>(action).getUnitID();
 		Unit* target = army.getUnit(targetID);
-		if (target == nullptr){
-			getchar();
-		}
 		target->takeDamage(currentUnit.getDamage().getValue());
 		//std::cout << "Shoot" << std::endl;
 		std::cout << "Unite " << currentUnit.getId() << " (Armee" << currentArmy << ") tire sur l'Unite " << target->getId() << "(Armee" << opponentArmy << ") qui n'a plus que " 
@@ -82,7 +79,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	int levelUnits_Y = 100;
 	int nbIteration_I = 1;
 	// doit être inférieur a N-1 * nombre d'unités
-	int scoreToReach_T = 7;
+	int scoreToReach_T = 10;
 	
 	std::vector<Army> armies = std::vector<Army>();
 	for (int i = 0; i < nbArmies_N; ++i){
@@ -107,8 +104,18 @@ int _tmain(int argc, _TCHAR* argv[])
 		// On sort la liste d'armée
 		std::sort(armies.begin(), armies.end());
 		if (armies.at(0).getScore() > scoreToReach_T){
+			std::cout << "L'armée gagnante est : " << armies.at(0).getId() << ", son score est de : " << armies.at(0).getScore() << std::endl;
 			break;
 		}
+		std::vector<Army> newArmies = std::vector<Army>();
+		newArmies.insert(newArmies.begin(), armies.begin(), armies.begin() + nbArmies_N / 10);
+
+		for (int j = 0; j < (nbArmies_N*0.3); j++){
+			newArmies.push_back(armies[j].mutate());
+			newArmies.push_back(*(armies[j] * armies[rand() % nbArmies_N]));
+			newArmies.push_back(Army(numberOfUnits_X, levelUnits_Y));
+		}
+		armies = newArmies;
 		/*
 		On créé notre nouvelle génération d’armées(qui remplacera la génération courante) de la façon suivante :
 				i.on garde les(N*0.1) meilleures armées
@@ -120,7 +127,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	//On save l'armée à l'indice 0 de armies
 	//first_army.saveArmy();
 
-	std::cout << "L'armée gagnante est : " << armies.at(0).getId() << ", son score est de : " << armies.at(0).getScore() << std::endl;
+	//std::cout << "L'armée gagnante est : " << armies.at(0).getId() << ", son score est de : " << armies.at(0).getScore() << std::endl;
+	std::cout << "Try again" << std::endl;
 	getchar();
 	return 0;
 }

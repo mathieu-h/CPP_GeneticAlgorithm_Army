@@ -137,10 +137,11 @@ void  Army::saveArmy(){
 		
 }
 
-void Army::mutate(){
+Army Army::mutate(){
 
 	int randIndex = std::rand() % _unitList.size();
 	_unitList.at(randIndex) = new Unit(_unitList.at(randIndex)->getLevel());
+	return *this;
 }
 
 Army* Army::operator*(Army& army){

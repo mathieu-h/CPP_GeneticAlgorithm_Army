@@ -60,7 +60,7 @@ public:
 	void purge();
 	void refreshUnits();
 	void saveArmy();
-	void mutate();
+	Army mutate();
 
 	Army* operator*(Army& army);
 	

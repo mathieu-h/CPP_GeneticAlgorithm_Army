@@ -146,7 +146,9 @@ Unit* Unit::operator*(Unit& unit){
 	//set one of the parent's IA Code	
 	_iaCode = (IACode)(rand() % 2?unit._iaCode:_iaCode);
 
-	int randLevel = std::rand() % std::abs((this->getLevel() - unit.getLevel()));
+	int randLevel = 0;
+	// if the levels are the same, it's not necessary
+	if (this->getLevel() - unit.getLevel()) { randLevel = std::rand() % std::abs((this->getLevel() - unit.getLevel())+1); }
 	randLevel += std::fmin(this->getLevel() , unit.getLevel());
 	
 	//distribute level among capacities randomly
