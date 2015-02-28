@@ -2,6 +2,7 @@
 
 
 enum IACode { LD = 0, HD, L0, H0, L1, H1, L2, H2, L3, H3, L4, H4, L5, H5, L6, H6 };
+
 class Capacity
 {
 
