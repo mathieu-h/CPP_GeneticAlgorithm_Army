@@ -101,3 +101,24 @@ Capacity& Unit::operator[](int index){
 			break;
 	}
 }
+
+std::ostream& operator<<(std::ostream& out, const Unit& army){
+	
+	out << army.getSpeed().getCLevel();
+	out << " ";
+	out << army.getHealth().getCLevel();
+	out << " ";
+	out << army.getArmor().getCLevel();
+	out << " ";
+	out << army.getHealthRegen().getCLevel();
+	out << " ";
+	out << army.getDamage().getCLevel();
+	out << " ";
+	out << army.getRange().getCLevel();
+	out << " ";
+	out << army.getWeaponSpeed().getCLevel();
+	out << " ";
+	out << army.getIACode();
+
+	return out;
+}

@@ -4,6 +4,9 @@
 #include "Capacity.h"
 #include <vector>
 #include <algorithm>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 Army::Army(int numberOfUnits, int level){
 	for (int i = 0; i < numberOfUnits; ++i){
@@ -103,6 +106,18 @@ void Army::setArmyInFormation(float verticalOrigin){
 
 Army::~Army()
 {
+}
+
+void  Army::saveArmy(){
+
+	std::ofstream myfile;
+	std::stringstream ss;
+	ss << "army_" << this->getUnitsList().size() << "_" << ".save";
+	std::string name = ss.str();
+	myfile.open(name);
+	myfile << this;
+	myfile.close();
+		
 }
 
 std::ostream& operator<<(std::ostream& out, const Army& army){

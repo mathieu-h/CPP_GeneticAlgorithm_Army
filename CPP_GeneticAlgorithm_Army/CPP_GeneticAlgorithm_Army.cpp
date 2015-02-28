@@ -96,6 +96,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	}
 
+	first_army.saveArmy();
+
 	getchar();
 	return 0;
 }
