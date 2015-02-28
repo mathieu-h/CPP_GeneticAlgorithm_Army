@@ -11,6 +11,7 @@
 #include <ctime>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 int Unit::_idCounter = 0;
 int Army::_idCounter = 0;
@@ -71,11 +72,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	//std::vector<int> scores = battleArmy(first_army, sec_army);
 	//std::cout << "Le score de l'armee 1 est de : " << scores.at(0) << std::endl;
 	//std::cout << "Le score de l'armee 2 est de : " << scores.at(1) << std::endl;
-
+	std::cout << "Entrez le nombre d'armées qui vont se battre : " << std::endl;
 	int nbArmies_N = 10;
+	std::cin >> nbArmies_N;
 	int numberOfUnits_X = 5;
 	int levelUnits_Y = 100;
-	int nbIteration_I = 1;
+	int nbIteration_I = 100;
 	// doit être inférieur a N-1 * nombre d'unités
 	int scoreToReach_T = 39;
 	
@@ -90,7 +92,7 @@ int _tmain(int argc, _TCHAR* argv[])
 				// appelle le constructeur par recopie
 				Army first_army = *it;
 				Army sec_army = *it_opp;
-				if (sec_army.getId() == first_army.getId()){ 
+				if (sec_army.getId() == first_army.getId()){  
 					continue; 
 				} else { 
 					std::vector<int> scores = battleArmy(first_army, sec_army);
@@ -125,6 +127,7 @@ int _tmain(int argc, _TCHAR* argv[])
 				iv.on génère(N*0.3) nouvelles armées aléatoirement
 		*/
 	}
+	
 	//On save l'armée à l'indice 0 de armies
 	//first_army.saveArmy();
 
