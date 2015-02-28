@@ -42,6 +42,8 @@ public:
 
 	Capacity& operator[](int index);
 
+	std::string getIACodeName(const IACode IACode) const;
+
 
 private:
 	int _id;
@@ -55,3 +57,5 @@ private:
 	Point _position;
 	IACode _iaCode;
 };
+
+std::ostream& operator<<(std::ostream& out, const Unit& army);

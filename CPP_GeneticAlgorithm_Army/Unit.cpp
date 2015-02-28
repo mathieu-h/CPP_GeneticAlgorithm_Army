@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Unit.h"
+#include <string>
 
 
 Unit::Unit(int globalLevel)
@@ -24,9 +25,12 @@ Unit::Unit(IACode iaCode, std::vector<int> levels)
 	_id = ++_idCounter;
 }
 
+
+
 Unit::~Unit()
 {
 }
+
 
 void Unit::refresh(){
 	//_health.updateValue();
@@ -102,6 +106,49 @@ Capacity& Unit::operator[](int index){
 	}
 }
 
+std::string Unit::getIACodeName(const IACode IACode) const{
+	
+	switch (IACode)
+	{
+	case IACode::LD:
+		return "LD";
+	case IACode::HD:
+		return "HD";
+	case IACode::L0:
+		return "L0";
+	case IACode::H0:
+		return "H0";
+	case IACode::L1:
+		return "L1";
+	case IACode::H1:
+		return "H1";
+	case IACode::L2:
+		return "L2";
+	case IACode::H2:
+		return "H2";
+	case IACode::L3:
+		return "L3";
+	case IACode::H3:
+		return "H3";
+	case IACode::L4:
+		return "L4";
+	case IACode::H4:
+		return "H4";
+	case IACode::L5:
+		return "L5";
+	case IACode::H5:
+		return "H5";
+	case IACode::L6:
+		return "L6";
+	case IACode::H6:
+		return "H6";
+
+	default:
+		return "";
+	}
+}
+
+
 std::ostream& operator<<(std::ostream& out, const Unit& army){
 	
 	out << army.getSpeed().getCLevel();
@@ -118,7 +165,7 @@ std::ostream& operator<<(std::ostream& out, const Unit& army){
 	out << " ";
 	out << army.getWeaponSpeed().getCLevel();
 	out << " ";
-	out << army.getIACode();
+	out << army.getIACodeName(army.getIACode());
 
 	return out;
 }

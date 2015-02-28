@@ -70,7 +70,7 @@ inline bool operator<(const Army& army1, const Army& army2){
 		return false;
 	}
 }
-
+std::ostream& operator<<(std::ostream& out, const Army& army);
 inline bool operator>(const Army& army1, const Army& army2){ return army2 < army1; }
 inline bool operator<=(const Army& army1, const Army& army2){ return !(army1>army2); }
 inline bool operator>=(const Army& army1, const Army& army2){ return !(army2>army1); }
