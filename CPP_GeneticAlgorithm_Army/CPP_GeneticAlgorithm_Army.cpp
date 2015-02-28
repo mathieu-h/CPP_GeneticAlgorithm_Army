@@ -69,6 +69,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		std::cout << "" << std::endl;
 	}
 
+	first_army.saveArmy();
+
 	getchar();
 	return 0;
 }

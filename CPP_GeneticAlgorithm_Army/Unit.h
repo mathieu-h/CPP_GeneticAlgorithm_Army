@@ -20,13 +20,13 @@ public:
 	Unit(IACode iaCode, std::vector<int> levels);
 	~Unit();
 
-	const Cap_Armor& getArmor(){ return _armor; };
-	const Cap_Damage& getDamage(){ return _damage; };
-	const Cap_Health& getHealth() { return _health; };
-	const Cap_HealthRegen& getHealthRegen(){ return _healthRegen; };
-	const Cap_Range& getRange(){ return _range; };
-	const Cap_Speed& getSpeed(){ return _speed; };
-	const Cap_WeaponSpeed& getWeaponSpeed(){ return _weaponSpeed; };
+	const Cap_Armor& getArmor()const { return _armor; };
+	const Cap_Damage& getDamage()const{ return _damage; };
+	const Cap_Health& getHealth()const { return _health; };
+	const Cap_HealthRegen& getHealthRegen()const{ return _healthRegen; };
+	const Cap_Range& getRange()const{ return _range; };
+	const Cap_Speed& getSpeed()const { return _speed; };
+	const Cap_WeaponSpeed& getWeaponSpeed()const{ return _weaponSpeed; };
 
 	int getLevel();
 	Point getPosition() const{ return _position; };

@@ -53,6 +53,7 @@ public:
 	void setArmyInFormation(float verticalOrigin);
 	void purge();
 	void refreshUnits();
+	void saveArmy();
 private:
 	std::vector<Unit*> _unitList;
 };
