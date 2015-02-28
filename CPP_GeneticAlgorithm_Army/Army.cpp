@@ -104,3 +104,8 @@ void Army::setArmyInFormation(float verticalOrigin){
 Army::~Army()
 {
 }
+
+/*std::ostream& operator<<(std::ostream& out, Army& army){
+	std::vector<Unit*> copy = army.getUnitsList();
+
+}*/

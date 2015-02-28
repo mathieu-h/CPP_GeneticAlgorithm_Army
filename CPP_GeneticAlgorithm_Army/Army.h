@@ -12,7 +12,7 @@ public:
 	Army(std::vector<Unit*>& unitList);
 	~Army();
 
-	std::vector<Unit*>& getUnitsList()
+	std::vector<Unit*> getUnitsList() const
 	{
 		return _unitList;
 	}
