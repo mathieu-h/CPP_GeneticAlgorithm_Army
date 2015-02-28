@@ -66,74 +66,86 @@ std::vector<int> battleArmy(Army& first_army, Army& sec_army){
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	std::srand(std::time(NULL));
-	//Army first_army = Army(5, 100);
-	//Army sec_army = Army(5, 100);
-	//std::vector<int> scores = battleArmy(first_army, sec_army);
-	//std::cout << "Le score de l'armee 1 est de : " << scores.at(0) << std::endl;
-	//std::cout << "Le score de l'armee 2 est de : " << scores.at(1) << std::endl;
-	std::cout << "Entrez le nombre d'armées qui vont se battre : " << std::endl;
-	int nbArmies_N = 10;
-	std::cin >> nbArmies_N;
-	int numberOfUnits_X = 5;
-	int levelUnits_Y = 100;
-	int nbIteration_I = 100;
-	// doit être inférieur a N-1 * nombre d'unités
-	int scoreToReach_T = 39;
-	
-	std::vector<Army> armies = std::vector<Army>();
-	for (int i = 0; i < nbArmies_N; ++i){
-		armies.push_back(Army(numberOfUnits_X, levelUnits_Y));
-	}
-	
-	for (int i = 0; i < nbIteration_I; ++i) {
-		for (std::vector<Army>::iterator it = armies.begin(); it != armies.end(); ++it) {
-			for (std::vector<Army>::iterator it_opp = it+1; it_opp != armies.end(); ++it_opp){
-				// appelle le constructeur par recopie
-				Army first_army = *it;
-				Army sec_army = *it_opp;
-				if (sec_army.getId() == first_army.getId()){  
-					continue; 
-				} else { 
-					std::vector<int> scores = battleArmy(first_army, sec_army);
-					it->setScore(it->getScore() + scores[0]);
-					it_opp->setScore(it_opp->getScore() + scores[1]);
+	std::locale::global(std::locale(""));
+	int userAnswer = 1;
+	while (userAnswer){
+		std::srand(std::time(NULL));
+		//Army first_army = Army(5, 100);
+		//Army sec_army = Army(5, 100);
+		//std::vector<int> scores = battleArmy(first_army, sec_army);
+		//std::cout << "Le score de l'armee 1 est de : " << scores.at(0) << std::endl;
+		//std::cout << "Le score de l'armee 2 est de : " << scores.at(1) << std::endl;
+		std::cout << "------------------------------- NOUVEAU TOUR --------------------------------- : " << std::endl;
+		bool goalReached = false;
+		int nbArmies_N = 0;
+		int numberOfUnits_X = 0;
+		int levelUnits_Y = 0;
+		int nbIteration_I = 0;
+		// doit être inférieur a N-1 * nombre d'unités
+		int scoreToReach_T = 0;
+		std::cout << "Entrez le nombre d'armées qui vont se battre : " << std::endl;
+		std::cin >> nbArmies_N;
+		std::cout << "Entrez le nombre d'unités par armée : " << std::endl;
+		std::cin >> numberOfUnits_X;
+		std::cout << "Entrez le niveau global des unités d'une armée : " << std::endl;
+		std::cin >> levelUnits_Y;
+		std::cout << "Entrez le nombre d'itération de l'agorithme génétique: " << std::endl;
+		std::cin >> nbIteration_I;
+		std::cout << "Entrez le score à atteindre pour l'armée à sauvegarder : " << std::endl;
+		std::cin >> scoreToReach_T;
+
+		std::vector<Army> armies = std::vector<Army>();
+		for (int i = 0; i < nbArmies_N; ++i){
+			armies.push_back(Army(numberOfUnits_X, levelUnits_Y));
+		}
+
+		for (int i = 0; i < nbIteration_I; ++i) {
+			for (std::vector<Army>::iterator it = armies.begin(); it != armies.end(); ++it) {
+				for (std::vector<Army>::iterator it_opp = it + 1; it_opp != armies.end(); ++it_opp){
+					// appelle le constructeur par recopie
+					Army first_army = *it;
+					Army sec_army = *it_opp;
+					if (sec_army.getId() == first_army.getId()){
+						continue;
+					}
+					else {
+						std::vector<int> scores = battleArmy(first_army, sec_army);
+						it->setScore(it->getScore() + scores[0]);
+						it_opp->setScore(it_opp->getScore() + scores[1]);
+					}
 				}
 			}
+			// On sort la liste d'armée
+			std::sort(armies.begin(), armies.end());
+			if (armies.at(0).getScore() > scoreToReach_T){
+				goalReached = true;
+				std::cout << "L'armée gagnante est : " << armies.at(0).getId() << ", son score est de : " << armies.at(0).getScore() << std::endl;
+				break;
+			}
+			if (i < nbIteration_I-1){
+				std::vector<Army> newArmies = std::vector<Army>();
+				newArmies.insert(newArmies.begin(), armies.begin(), armies.begin() + nbArmies_N / 10);
+
+				for (int j = 0; j < (nbArmies_N*0.3); j++){
+					newArmies.push_back(armies[j].mutate());
+					newArmies.push_back(*(armies[j] * armies[rand() % nbArmies_N]));
+					newArmies.push_back(Army(numberOfUnits_X, levelUnits_Y));
+				}
+				for (int k = 0; k < newArmies.size(); ++k){
+					newArmies.at(k).setScore(0);
+				}
+				armies = newArmies;
+			}
 		}
-		// On sort la liste d'armée
-		std::sort(armies.begin(), armies.end());
-		if (armies.at(0).getScore() > scoreToReach_T){
+		//first_army.saveArmy();
+		if (!goalReached)
+		{
 			std::cout << "L'armée gagnante est : " << armies.at(0).getId() << ", son score est de : " << armies.at(0).getScore() << std::endl;
-			break;
+			std::cout << "Le score est trop haut, aucune armée n'a atteint le score que vous avez demandée" << std::endl;
 		}
-		std::vector<Army> newArmies = std::vector<Army>();
-		newArmies.insert(newArmies.begin(), armies.begin(), armies.begin() + nbArmies_N / 10);
-
-		for (int j = 0; j < (nbArmies_N*0.3); j++){
-			newArmies.push_back(armies[j].mutate());
-			newArmies.push_back(*(armies[j] * armies[rand() % nbArmies_N]));
-			newArmies.push_back(Army(numberOfUnits_X, levelUnits_Y));
-		}
-		for (int k = 0; k < newArmies.size(); ++k){
-			newArmies.at(k).setScore(0);
-		}
-		armies = newArmies;
-		/*
-		On créé notre nouvelle génération d’armées(qui remplacera la génération courante) de la façon suivante :
-				i.on garde les(N*0.1) meilleures armées
-				ii.on prend un croisement issu de chacune des(N*0.3) meilleures armées avec une autre prise aléatoirement
-				iii.on prend une mutation de chacune des(N*0.3) meilleures armées
-				iv.on génère(N*0.3) nouvelles armées aléatoirement
-		*/
+		std::cout << "Entrez 1 pour continuer ou 0 pour arrêter le programme : " << std::endl;
+		std::cin >> userAnswer;
 	}
-	
-	//On save l'armée à l'indice 0 de armies
-	//first_army.saveArmy();
-
-	//std::cout << "L'armée gagnante est : " << armies.at(0).getId() << ", son score est de : " << armies.at(0).getScore() << std::endl;
-	std::cout << "Try again" << std::endl;
-	getchar();
 	return 0;
 }
 
