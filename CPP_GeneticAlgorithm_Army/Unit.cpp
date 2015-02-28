@@ -148,14 +148,16 @@ Unit* Unit::operator*(Unit& unit){
 
 	int randLevel = 0;
 	// if the levels are the same, it's not necessary
-	if (this->getLevel() - unit.getLevel()) { randLevel = std::rand() % std::abs((this->getLevel() - unit.getLevel())+1); }
+	if (this->getLevel() != unit.getLevel()) {
+		randLevel = std::rand() % std::abs((this->getLevel() - unit.getLevel())+1); 
+	}
 	randLevel += std::fmin(this->getLevel() , unit.getLevel());
 	
 	//distribute level among capacities randomly
 	while (randLevel > 0){
 		int randCapacity = std::rand() % 7;
 		int newUnitLevel = newUnit->operator[](randCapacity).getCLevel();
-			if (newUnitLevel <= this->operator[](randCapacity).getCLevel() && newUnitLevel <= unit[randCapacity].getCLevel()){
+			if (newUnitLevel <= std::fmax(this->operator[](randCapacity).getCLevel() , newUnitLevel <= unit[randCapacity].getCLevel())){
 				newUnit->operator[](randCapacity).upgrade();
 				randLevel--;
 			};
