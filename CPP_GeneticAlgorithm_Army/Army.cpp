@@ -146,10 +146,10 @@ Army Army::mutate(){
 
 Army* Army::operator*(Army& army){
 
-	int unitsCount = army.getUnitsList().size();
+	double unitsCount = army.getUnitsList().size();
 	std::vector<Unit*> newUnits = std::vector<Unit*>(0);
 
-	int bla = unitsCount / 3;
+	int bla = std::ceil(unitsCount / 3.0);
 
 	for (int i = 0; i < bla; ++i){
 		newUnits.push_back(_unitList.at(i));

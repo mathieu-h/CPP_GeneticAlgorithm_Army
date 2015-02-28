@@ -1,30 +1,19 @@
-﻿========================================================================
-    APPLICATION CONSOLE : Vue d'ensemble du projet CPP_GeneticAlgorithm_Army
-========================================================================
+Projet bataille IA
 
-AppWizard a créé cette application CPP_GeneticAlgorithm_Army pour vous.
+Mathieu Harharidis, Maxime Lahaye.
 
-Ce fichier contient un résumé du contenu de chacun des fichiers qui constituent votre application CPP_GeneticAlgorithm_Army.
+La Partie A a été implémentée en entier par nous 2.
+La Partie B a été implémentée en entier par Mathieu.
+La partie C a été implémentée en entier par nous 2.
 
+Le programme s'exécute sans erreurs ni plantage.
+Cependant nous avons remarqué que les résultats de l'algorithme génétique ne tendent pas vers des armées ayant un meilleur score.
+Nous avons plusieurs hypothèses afin d'expliquer ce résultat :
+	- Des imprécisions dans le déroulement des batailles mènent à des scores ne réflétant pas la meilleure armée.
+	- Cela peut être dû au fait que les armées qui s'affrontent sont de plus en plus forte et donc qu'aucune armée n'arrive à augmenter significativement son score. Cependant, cela ne voudra pas forcémeent dire que les armées ne sont pas meilleures qu'au début.
+	- Deux batailles avec deux armées identique n'aura pas forcément la même issue dû au fait que l'algorithme ne prendra les unités dans le même ordre.
 
-CPP_GeneticAlgorithm_Army.vcxproj
-    Il s'agit du fichier projet principal pour les projets VC++ générés à l'aide d'un Assistant Application. Il contient des informations sur la version de Visual C++ utilisée pour générer le fichier ainsi que des informations relatives aux plateformes, configurations et fonctionnalités du projet que vous avez sélectionnées dans l'Assistant Application.
+Afin d'utiliser le programme, il suffit de le lancer, de répondre aux questions, de laisser l'algorithme tourner et d'attendre le résultat affichant la meilleure équipe. Ce résultat est également sauvegardé dans un fichier.
+Á la fin vous avez l'occasion de recommencer le processus.
 
-CPP_GeneticAlgorithm_Army.vcxproj.filters
-    Il s'agit du fichier de filtres pour les projets VC++ générés à l'aide d'un Assistant Application. Il contient des informations sur l'association entre les fichiers de votre projet et les filtres. Cette association est utilisée dans l'IDE pour afficher le regroupement des fichiers qui ont des extensions similaires sous un nœud spécifique (par exemple, les fichiers ".cpp" sont associés au filtre "Fichiers sources").
-
-CPP_GeneticAlgorithm_Army.cpp
-    Il s'agit du fichier source principal de l'application.
-
-/////////////////////////////////////////////////////////////////////////////
-Autres fichiers standard :
-
-StdAfx.h, StdAfx.cpp
-    Ces fichiers sont utilisés pour générer un fichier d'en-tête précompilé (PCH) CPP_GeneticAlgorithm_Army.pch et un fichier de type précompilé nommé StdAfx.obj.
-
-/////////////////////////////////////////////////////////////////////////////
-Autres remarques :
-
-AppWizard utilise des commentaires "TODO:" pour indiquer les parties du code source où vous devrez ajouter ou modifier du code.
-
-/////////////////////////////////////////////////////////////////////////////
+Bon utilisation.
