@@ -54,7 +54,9 @@ public:
 	void purge();
 	void refreshUnits();
 	void saveArmy();
+	void mutate();
 
+	Army* operator*(Army& army);
 	
 private:
 	std::vector<Unit*> _unitList;

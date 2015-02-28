@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Unit.h"
 #include <string>
-
+#include <cmath>
 
 Unit::Unit(int globalLevel)
 {
@@ -84,6 +84,28 @@ int Unit::getLevel(){
 	return globalLevel;
 }
 
+void Unit::mutate(){
+
+	//Initializing a dumb ref
+	Capacity& c = Cap_Armor();
+	//We need a random not null capacity
+	int randIndex = 0;
+	do{
+		randIndex = std::rand() % 7;
+		c = this->operator[](randIndex);
+	} while (c.getCLevel() == 0);
+
+	//We need a random capacity different than the first one
+	int randIndex2 = 0;
+	do{
+		randIndex2 = std::rand() % 7;
+	} while (randIndex2 == randIndex);
+
+	this->operator[](randIndex).downgrade();
+	this->operator[](randIndex2).upgrade();
+
+}
+
 Capacity& Unit::operator[](int index){
 	switch (index){
 		case 0:
@@ -104,6 +126,30 @@ Capacity& Unit::operator[](int index){
 			return _speed;
 			break;
 	}
+}
+
+Unit* Unit::operator*(Unit& unit){
+
+	Unit* newUnit = new Unit(0);
+
+	//set one of the parent's IA Code	
+	_iaCode = (IACode)(rand() % 2?unit._iaCode:_iaCode);
+
+	int randLevel = std::rand() % std::abs((this->getLevel() - unit.getLevel()));
+	randLevel += std::fmin(this->getLevel() , unit.getLevel());
+	
+	//distribute level among capacities randomly
+	while (randLevel > 0){
+		int randCapacity = std::rand() % 7;
+		int newUnitLevel = newUnit->operator[](randCapacity).getCLevel();
+			if (newUnitLevel <= this->operator[](randCapacity).getCLevel() && newUnitLevel <= unit[randCapacity].getCLevel()){
+				newUnit->operator[](randCapacity).upgrade();
+				randLevel--;
+			};
+	}
+	_id = ++_idCounter;
+
+	return newUnit;
 }
 
 std::string Unit::getIACodeName(const IACode IACode) const{

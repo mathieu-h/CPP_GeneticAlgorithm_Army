@@ -114,12 +114,43 @@ void  Army::saveArmy(){
 
 	std::ofstream myfile;
 	std::stringstream ss;
-	ss << "army_" << this->getUnitsList().size() << "_" << ".save";
+	ss << "army_" << this->getUnitsList().size() << "_" << this->getGlobalLevel() << ".save";
 	std::string name = ss.str();
 	myfile.open(name);
 	myfile << *this;
 	myfile.close();
 		
+}
+
+void Army::mutate(){
+
+	int randIndex = std::rand() % _unitList.size();
+	_unitList.at(randIndex) = new Unit(_unitList.at(randIndex)->getLevel());
+}
+
+Army* Army::operator*(Army& army){
+
+	int unitsCount = army.getUnitsList().size();
+	std::vector<Unit*> newUnits = std::vector<Unit*>(unitsCount);
+
+	int bla = unitsCount / 3;
+
+	for (int i = 0; i < bla; ++i){
+		newUnits.push_back(_unitList.at(i));
+	}
+	for (int i = 0; i < bla; ++i){
+		newUnits.push_back(army._unitList.at(i));
+	}
+
+	unitsCount -= (2 * bla);
+
+	for (int i = 0; i < bla; ++i){
+		Unit* unitA = army._unitList.at(i);
+		Unit* unitB = _unitList.at(i);
+		newUnits.push_back(*unitA * *unitB);
+	}
+
+	return new Army(newUnits);
 }
 
 int Army::getGlobalLevel() const{

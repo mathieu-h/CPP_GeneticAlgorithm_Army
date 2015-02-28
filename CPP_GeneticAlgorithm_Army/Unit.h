@@ -40,7 +40,10 @@ public:
 	void takeDamage(float value);
 	bool isAlive();
 
+	void mutate();
+
 	Capacity& operator[](int index);
+	Unit* Unit::operator*(Unit& unit);
 
 	std::string getIACodeName(const IACode IACode) const;
 
