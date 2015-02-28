@@ -22,17 +22,14 @@ void executeAction(Action& action, Unit& currentUnit,Army& army, int currentArmy
 	if (action.getType() == MOVE){
 		Point nextPosition = static_cast<ActionMove&>(action).getNextPosition();
 		currentUnit.setPosition(nextPosition);
-		std::cout << "Unite " << currentUnit.getId() << " (Armee" << currentArmy << ") bouge en position (" << (int)nextPosition.x_get() << "," << (int)nextPosition.y_get() << ")"<< std::endl;
+		//std::cout << "Unite " << currentUnit.getId() << " (Armee" << currentArmy << ") bouge en position (" << (int)nextPosition.x_get() << "," << (int)nextPosition.y_get() << ")"<< std::endl;
 	}
 	else if (action.getType() == SHOOT && currentUnit.shoot()){
-		//int opponentArmy = 0;
-		//currentArmy == A1 ? opponentArmy = A2 : opponentArmy = A1;
 		int targetID = static_cast<ActionShoot&>(action).getUnitID();
 		Unit* target = army.getUnit(targetID);
 		target->takeDamage(currentUnit.getDamage().getValue());
-		//std::cout << "Shoot" << std::endl;
-		std::cout << "Unite " << currentUnit.getId() << " (Armee" << currentArmy << ") tire sur l'Unite " << target->getId() << "(Armee" << opponentArmy << ") qui n'a plus que " 
-			<< target->getHealth().getValue() << "PV" << std::endl;
+		//std::cout << "Unite " << currentUnit.getId() << " (Armee" << currentArmy << ") tire sur l'Unite " << target->getId() << "(Armee" << opponentArmy << ") qui n'a plus que " 
+		//	<< target->getHealth().getValue() << "PV" << std::endl;
 	}
 }
 
@@ -45,7 +42,7 @@ std::vector<int> battleArmy(Army& first_army, Army& sec_army){
 	int tourCounter = 0;
 	while (!first_army.isEmpty() && !sec_army.isEmpty()){
 		++tourCounter;
-		std::cout << "=============================== Tour " << tourCounter << " ===============================" << std::endl;
+		//std::cout << "=============================== Tour " << tourCounter << " ===============================" << std::endl;
 		Unit* currentUnit = nullptr;
 		currentUnit = first_units[rand() % first_units.size()];
 		executeAction(ia(*currentUnit, first_army, sec_army), *currentUnit, sec_army, first_army.getId(), sec_army.getId());
@@ -55,10 +52,11 @@ std::vector<int> battleArmy(Army& first_army, Army& sec_army){
 		executeAction(ia(*currentUnit, sec_army, first_army), *currentUnit, first_army, sec_army.getId(), first_army.getId());
 		sec_army.refreshUnits();
 		first_army.purge();
-		std::cout << "" << std::endl;
+		//std::cout << "" << std::endl;
 	}
 	std::cout << "Le score de l'armee " << first_army.getId() << " est de : " << first_army.size() << std::endl;
 	std::cout << "Le score de l'armee " << sec_army.getId() << " est de : " << sec_army.size() << std::endl;
+	std::cout << "----------------------------------------------------------------------" << std::endl;
 	std::vector<int> scores = std::vector<int>();
 	scores.push_back(first_army.size());
 	scores.push_back(sec_army.size());
@@ -74,12 +72,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	//std::cout << "Le score de l'armee 1 est de : " << scores.at(0) << std::endl;
 	//std::cout << "Le score de l'armee 2 est de : " << scores.at(1) << std::endl;
 
-	int nbArmies_N = 3;
+	int nbArmies_N = 10;
 	int numberOfUnits_X = 5;
 	int levelUnits_Y = 100;
 	int nbIteration_I = 1;
 	// doit être inférieur a N-1 * nombre d'unités
-	int scoreToReach_T = 10;
+	int scoreToReach_T = 39;
 	
 	std::vector<Army> armies = std::vector<Army>();
 	for (int i = 0; i < nbArmies_N; ++i){
