@@ -92,7 +92,7 @@ int _tmain(int argc, _TCHAR* argv[])
 				// how to resolve the fact that it mustnt fight against itself ? (std::remove, id on army)
 			}
 		}
-		std::sort(armies.begin(), armies.end());
+		//std::sort(armies.begin(), armies.end());
 
 	}
 
