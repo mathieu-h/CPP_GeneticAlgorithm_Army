@@ -105,7 +105,12 @@ Army::~Army()
 {
 }
 
-/*std::ostream& operator<<(std::ostream& out, Army& army){
-	std::vector<Unit*> copy = army.getUnitsList();
-
-}*/
+std::ostream& operator<<(std::ostream& out, const Army& army){
+	std::vector<Unit*> unitList = army.getUnitsList();
+	Unit* currentUnit;
+	for (std::vector<Unit*>::iterator it = unitList.begin(); it != unitList.end(); ++it) {
+		currentUnit = *it;
+		out << currentUnit << std::endl;
+	}
+	return out;
+}
