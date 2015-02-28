@@ -58,3 +58,4 @@ private:
 	std::vector<Unit*> _unitList;
 };
 
+std::ostream& operator<<(std::ostream& out, const Army& army);

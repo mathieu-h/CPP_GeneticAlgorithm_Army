@@ -115,7 +115,7 @@ void  Army::saveArmy(){
 	ss << "army_" << this->getUnitsList().size() << "_" << ".save";
 	std::string name = ss.str();
 	myfile.open(name);
-	myfile << this;
+	myfile << *this;
 	myfile.close();
 		
 }
@@ -123,9 +123,9 @@ void  Army::saveArmy(){
 std::ostream& operator<<(std::ostream& out, const Army& army){
 	std::vector<Unit*> unitList = army.getUnitsList();
 	Unit* currentUnit;
-	for (std::vector<Unit*>::iterator it = unitList.begin(); it != unitList.end(); ++it) {
+	for (std::vector<Unit*>::const_iterator it = unitList.begin(); it != unitList.end(); ++it) {
 		currentUnit = *it;
-		out << currentUnit << std::endl;
+		out << *currentUnit << std::endl;
 	}
 	return out;
 }
