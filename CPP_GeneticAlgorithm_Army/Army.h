@@ -17,10 +17,10 @@ public:
 		return _unitList;
 	}
 
-	Unit& getNearestUnit(const Point& p);
-	Unit& getFurthestUnit(const Point& p);
-	Unit& getLowestUnit(int capa_index);
-	Unit& getHighestUnit(int capa_index);
+	Unit& getNearestUnit(const Point& p) const;
+	Unit& getFurthestUnit(const Point& p) const;
+	Unit& getLowestUnit(int capa_index) const;
+	Unit& getHighestUnit(int capa_index) const;
 
 	Unit* getUnit(int id){
 		Unit* current;
@@ -32,16 +32,7 @@ public:
 		}
 	}
 
-	//Returns copy instead of the real unit so don't use this
-	Unit& getUnitRef(int id){
-		Unit* current;
-		for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
-			current = (*it);
-			if ((*current).getId() == id){
-				return (*current);
-			}
-		}
-	}
+	int getGlobalLevel() const;
 
 	int size() const {
 		return _unitList.size();

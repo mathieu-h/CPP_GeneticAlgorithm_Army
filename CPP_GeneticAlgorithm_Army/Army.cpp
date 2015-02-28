@@ -20,10 +20,10 @@ Army::Army(std::vector<Unit*>& unitList){
 	_unitList = unitList;
 }
 
-Unit& Army::getNearestUnit(const Point& p) {
+Unit& Army::getNearestUnit(const Point& p) const{
 	Unit* currentUnit;
 	Unit* currentNearestUnit = nullptr;
-	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
+	for (std::vector<Unit*>::const_iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
 		if (currentNearestUnit == nullptr) currentNearestUnit = *it;
 		currentUnit = *it;
 		if (currentUnit->getPosition().distance(p) < currentNearestUnit->getPosition().distance(p)){
@@ -33,10 +33,10 @@ Unit& Army::getNearestUnit(const Point& p) {
 	return *currentNearestUnit;
 }
 
-Unit& Army::getFurthestUnit(const Point& p) {
+Unit& Army::getFurthestUnit(const Point& p) const{
 	Unit* currentUnit;
 	Unit* currentFurthestUnit = nullptr;
-	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
+	for (std::vector<Unit*>::const_iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
 		if (currentFurthestUnit == nullptr) currentFurthestUnit = *it;
 		currentUnit = *it;
 		if (currentUnit->getPosition().distance(p) > currentFurthestUnit->getPosition().distance(p)){
@@ -46,10 +46,10 @@ Unit& Army::getFurthestUnit(const Point& p) {
 	return *currentFurthestUnit;
 }
 
-Unit& Army::getLowestUnit(int capa_index) {
+Unit& Army::getLowestUnit(int capa_index) const{
 	Unit* currentUnit;
 	Unit* currentLowestUnit = new Unit(1000);
-	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
+	for (std::vector<Unit*>::const_iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
 		currentUnit = (*it);
 		if ((*currentUnit)[capa_index].getCLevel() < (*currentLowestUnit)[capa_index].getCLevel()){
 			currentLowestUnit = currentUnit;
@@ -58,10 +58,10 @@ Unit& Army::getLowestUnit(int capa_index) {
 	return *currentLowestUnit;
 }
 
-Unit& Army::getHighestUnit(int capa_index){
+Unit& Army::getHighestUnit(int capa_index) const{
 	Unit* currentUnit;
 	Unit* currentBestUnit = new Unit(0);
-	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
+	for (std::vector<Unit*>::const_iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
 		currentUnit = (*it);
 		if ((*currentUnit)[capa_index].getCLevel() > (*currentBestUnit)[capa_index].getCLevel()){
 			currentBestUnit = currentUnit;
@@ -118,6 +118,16 @@ void  Army::saveArmy(){
 	myfile << this;
 	myfile.close();
 		
+}
+
+int Army::getGlobalLevel() const{
+	Unit* currentUnit;
+	int globalLevel = 0;
+	for (std::vector<Unit*>::const_iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
+		currentUnit = *it;
+		globalLevel += currentUnit->getLevel();
+	}
+	return globalLevel;
 }
 
 std::ostream& operator<<(std::ostream& out, const Army& army){

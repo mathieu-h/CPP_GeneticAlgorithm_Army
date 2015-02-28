@@ -59,7 +59,7 @@ std::vector<int> battleArmy(Army& first_army, Army& sec_army){
 		std::cout << "" << std::endl;
 	}
 	std::cout << "Le score de l'armee 1 est de : " << first_army.size() << std::endl;
-	//std::cout << "Le score de l'armee 2 est de : " << sec_army.size() << std::endl;
+	std::cout << "Le score de l'armee 2 est de : " << sec_army.size() << std::endl;
 	std::vector<int> scores = std::vector<int>();
 	scores.push_back(first_army.size());
 	scores.push_back(sec_army.size());
@@ -83,7 +83,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (int i = 0; i < nbArmies_N; ++i){
 		armies.push_back(Army(numberOfUnits_X, levelUnits_Y));
 	}
-
+	/*
 	for (int i = 0; i < nbIteration_I; ++i) {
 		for (std::vector<Army>::iterator it = armies.begin(); it != armies.end(); ++it) {
 			for (std::vector<Army>::iterator it_opp = armies.begin(); it != armies.end(); ++it){
@@ -94,9 +94,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 		//std::sort(armies.begin(), armies.end());
 
-	}
+	}*/
 
-	first_army.saveArmy();
+	//first_army.saveArmy();
 
 	getchar();
 	return 0;
