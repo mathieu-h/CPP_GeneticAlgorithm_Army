@@ -11,6 +11,7 @@ public:
 	static int _idCounter;
 	Army(int numberOfUnits, int level);
 	Army(std::vector<Unit*>& unitList);
+    Army::Army(const Army& armyToCopy);
 	~Army();
 
 	std::vector<Unit*> getUnitsList() const
@@ -38,18 +39,23 @@ public:
 	int size() const {
 		return _unitList.size();
 	}
-
-	int getScore() const{ 
-		return _unitList.size();
-	}
-
 	int getId() const{
 		return _id;
+	}
+
+	int getScore() const{ 
+		return _score;
+	}
+
+	void setScore(int newScore){
+		_score = newScore;
 	}
 
 	bool isEmpty(){
 		return _unitList.size() == 0;
 	}
+
+
 	void setArmyInFormation(float verticalOrigin);
 	void purge();
 	void refreshUnits();
@@ -61,10 +67,11 @@ public:
 private:
 	std::vector<Unit*> _unitList;
 	int _id;
+	int _score;
 };
 
 inline bool operator<(const Army& army1, const Army& army2){
-	if (army1.getScore() < army2.getScore()){
+	if (army1.getScore() > army2.getScore()){
 		return true;
 	}
 	else

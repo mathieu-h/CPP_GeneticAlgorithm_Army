@@ -14,18 +14,19 @@
 
 int Unit::_idCounter = 0;
 int Army::_idCounter = 0;
+/*
 #define A1 1
 #define A2 2
-
-void executeAction(Action& action, Unit& currentUnit,Army& army, int currentArmy){
+*/
+void executeAction(Action& action, Unit& currentUnit,Army& army, int currentArmy, int opponentArmy){
 	if (action.getType() == MOVE){
 		Point nextPosition = static_cast<ActionMove&>(action).getNextPosition();
 		currentUnit.setPosition(nextPosition);
 		std::cout << "Unite " << currentUnit.getId() << " (Armee" << currentArmy << ") bouge en position (" << (int)nextPosition.x_get() << "," << (int)nextPosition.y_get() << ")"<< std::endl;
 	}
 	else if (action.getType() == SHOOT && currentUnit.shoot()){
-		int opponentArmy = 0;
-		currentArmy == A1 ? opponentArmy = A2 : opponentArmy = A1;
+		//int opponentArmy = 0;
+		//currentArmy == A1 ? opponentArmy = A2 : opponentArmy = A1;
 		int targetID = static_cast<ActionShoot&>(action).getUnitID();
 		Unit* target = army.getUnit(targetID);
 		if (target == nullptr){
@@ -50,17 +51,17 @@ std::vector<int> battleArmy(Army& first_army, Army& sec_army){
 		std::cout << "=============================== Tour " << tourCounter << " ===============================" << std::endl;
 		Unit* currentUnit = nullptr;
 		currentUnit = first_units[rand() % first_units.size()];
-		executeAction(ia(*currentUnit, first_army, sec_army), *currentUnit, sec_army, A1);
+		executeAction(ia(*currentUnit, first_army, sec_army), *currentUnit, sec_army, first_army.getId(), sec_army.getId());
 		first_army.refreshUnits();
 		sec_army.purge();
 		currentUnit = sec_units[rand() % sec_units.size()];
-		executeAction(ia(*currentUnit, sec_army, first_army), *currentUnit, first_army, A2);
+		executeAction(ia(*currentUnit, sec_army, first_army), *currentUnit, first_army, sec_army.getId(), first_army.getId());
 		sec_army.refreshUnits();
 		first_army.purge();
 		std::cout << "" << std::endl;
 	}
-	std::cout << "Le score de l'armee 1 est de : " << first_army.size() << std::endl;
-	std::cout << "Le score de l'armee 2 est de : " << sec_army.size() << std::endl;
+	std::cout << "Le score de l'armee " << first_army.getId() << " est de : " << first_army.size() << std::endl;
+	std::cout << "Le score de l'armee " << sec_army.getId() << " est de : " << sec_army.size() << std::endl;
 	std::vector<int> scores = std::vector<int>();
 	scores.push_back(first_army.size());
 	scores.push_back(sec_army.size());
@@ -79,7 +80,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	int nbArmies_N = 3;
 	int numberOfUnits_X = 5;
 	int levelUnits_Y = 100;
-	int nbIteration_I = 10;
+	int nbIteration_I = 1;
 	// doit être inférieur a N-1 * nombre d'unités
 	int scoreToReach_T = 7;
 	
@@ -89,15 +90,18 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 	
 	for (int i = 0; i < nbIteration_I; ++i) {
-		std::vector<Army> armies_copy = armies;
-		for (std::vector<Army>::iterator it = armies_copy.begin(); it != armies_copy.end(); ++it) {			
-			std::vector<Army> armies_copy_2 = armies;
-			for (std::vector<Army>::iterator it_opp = armies_copy_2.begin(); it_opp != armies_copy_2.end(); ++it_opp){
-				// how to resolve the fact that it mustnt fight against itself ( id on army)
+		for (std::vector<Army>::iterator it = armies.begin(); it != armies.end(); ++it) {
+			for (std::vector<Army>::iterator it_opp = it+1; it_opp != armies.end(); ++it_opp){
+				// appelle le constructeur par recopie
 				Army first_army = *it;
 				Army sec_army = *it_opp;
-				if (sec_army.getId() == first_army.getId()) continue;
-				std::vector<int> scores = battleArmy(first_army, sec_army);
+				if (sec_army.getId() == first_army.getId()){ 
+					continue; 
+				} else { 
+					std::vector<int> scores = battleArmy(first_army, sec_army);
+					it->setScore(it->getScore() + scores[0]);
+					it_opp->setScore(it_opp->getScore() + scores[1]);
+				}
 			}
 		}
 		// On sort la liste d'armée
@@ -115,7 +119,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 	//On save l'armée à l'indice 0 de armies
 	//first_army.saveArmy();
-	
+
+	std::cout << "L'armée gagnante est : " << armies.at(0).getId() << ", son score est de : " << armies.at(0).getScore() << std::endl;
 	getchar();
 	return 0;
 }
