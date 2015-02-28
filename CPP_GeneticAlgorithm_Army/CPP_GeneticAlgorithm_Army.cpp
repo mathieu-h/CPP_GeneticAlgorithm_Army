@@ -10,6 +10,7 @@
 #include "Point.h"
 #include <ctime>
 #include <vector>
+#include <algorithm>
 
 int Unit::_idCounter = 0;
 #define A1 1
@@ -45,7 +46,7 @@ std::vector<int> battleArmy(Army& first_army, Army& sec_army){
 	int tourCounter = 0;
 	while (!first_army.isEmpty() && !sec_army.isEmpty()){
 		++tourCounter;
-		std::cout << "=============================== Tour " << tourCounter << " ===================================" << std::endl;
+		std::cout << "=============================== Tour " << tourCounter << " ===============================" << std::endl;
 		Unit* currentUnit = nullptr;
 		currentUnit = first_units[rand() % first_units.size()];
 		executeAction(ia(*currentUnit, first_army, sec_army), *currentUnit, sec_army, A1);
@@ -88,8 +89,11 @@ int _tmain(int argc, _TCHAR* argv[])
 			for (std::vector<Army>::iterator it_opp = armies.begin(); it != armies.end(); ++it){
 				// copy it, copy it_opp
 				//make it fight against it_opp
+				// how to resolve the fact that it mustnt fight against itself ? (std::remove, id on army)
 			}
 		}
+		std::sort(armies.begin(), armies.end());
+
 	}
 
 	getchar();
