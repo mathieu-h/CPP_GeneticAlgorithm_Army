@@ -22,12 +22,23 @@ public:
 	Unit& getLowestUnit(int capa_index);
 	Unit& getHighestUnit(int capa_index);
 
-	Unit& getUnit(int id){
+	Unit* getUnit(int id){
 		Unit* current;
 		for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
 			current = (*it);
 			if ((*current).getId() == id){
-				return *current;
+				return current;
+			}
+		}
+	}
+
+	//Returns copy instead of the real unit so don't use this
+	Unit& getUnitRef(int id){
+		Unit* current;
+		for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
+			current = (*it);
+			if ((*current).getId() == id){
+				return (*current);
 			}
 		}
 	}

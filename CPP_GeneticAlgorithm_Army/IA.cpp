@@ -35,7 +35,7 @@ Action& IA::operator() (Unit& unit, Army& armyOne, Army& armyTwo){
 			centerOfArmy += unit->getPosition();
 		}
 		centerOfArmy /= static_cast<float> (units.size());
-		Point* newPosition = unit.getPosition().moveToPoint(centerOfArmy, unit.getSpeed().getValue());
+		Point* newPosition = unit.getPosition().moveAwayFromPoint(centerOfArmy, unit.getSpeed().getValue());
 		//unit.setPosition(*newPosition);
 		return *new ActionMove(*newPosition);
 	}

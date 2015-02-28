@@ -21,10 +21,10 @@ Point::Point(const Point &p)
 
 Point* Point::moveToPoint(Point& pointTarget, double speed)
 {	
-	double coeffMove = speed / this->distance(pointTarget);
+	double coeffMove = speed / (this->distance(pointTarget));
 	// if the speed is greater that the distance then we limit the coeff otherwise the unit will go too far
 	if (coeffMove > 1) coeffMove = 1;
-	coeffMove = 1-(speed / this->distance(pointTarget));
+	//coeffMove = 1 - (coeffMove);
 	float x = (1-coeffMove)*x_ + coeffMove * pointTarget.x_;
 	float y = (1-coeffMove)*y_ + coeffMove * pointTarget.y_;
 	return new Point(x, y);
@@ -32,9 +32,11 @@ Point* Point::moveToPoint(Point& pointTarget, double speed)
 
 Point* Point::moveAwayFromPoint(Point& pointTarget, double speed)
 {
-	double coeffMove = 1 + (speed / this->distance(pointTarget));
-	float x = (1 - coeffMove)*x_ + coeffMove * pointTarget.x_;
-	float y = (1 - coeffMove)*y_ + coeffMove * pointTarget.y_;
+	double coeffMove = speed / (this->distance(pointTarget));
+	//if (coeffMove > 1) coeffMove = 1;
+	coeffMove = 1 - (coeffMove);
+	float x = (1 - coeffMove)*pointTarget.x_ + coeffMove * x_;
+	float y = (1 - coeffMove)*pointTarget.y_ + coeffMove * y_;
 	return new Point(x, y);
 }
 
@@ -69,7 +71,7 @@ Point Point::operator-(const Point& p) const{
 
 Point& Point::operator/=(float divider){
 	this->x_set(x_/divider);
-	this->x_set(y_ /divider);
+	this->y_set(y_ /divider);
 	return *this;
 }
 

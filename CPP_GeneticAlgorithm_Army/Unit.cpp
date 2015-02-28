@@ -29,7 +29,7 @@ Unit::~Unit()
 }
 
 void Unit::refresh(){
-	_health.updateValue();
+	//_health.updateValue();
 	//_health.setValue(_health.getValue() + _healthRegen.getValue());
 	_weaponSpeed.decrementReloadTime();
 }

@@ -2,6 +2,8 @@
 #include "Army.h"
 #include "Unit.h"
 #include "Capacity.h"
+#include <vector>
+#include <algorithm>
 
 Army::Army(int numberOfUnits, int level){
 	for (int i = 0; i < numberOfUnits; ++i){
@@ -17,10 +19,9 @@ Army::Army(std::vector<Unit*>& unitList){
 
 Unit& Army::getNearestUnit(const Point& p) {
 	Unit* currentUnit;
-	Unit* currentNearestUnit = new Unit(10);
-	// I set the nearestUnit at the given position so i'm sure it's the closest possible
-	currentNearestUnit->setPosition(Point(p));
+	Unit* currentNearestUnit = nullptr;
 	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
+		if (currentNearestUnit == nullptr) currentNearestUnit = *it;
 		currentUnit = *it;
 		if (currentUnit->getPosition().distance(p) < currentNearestUnit->getPosition().distance(p)){
 			currentNearestUnit = currentUnit;
@@ -31,10 +32,9 @@ Unit& Army::getNearestUnit(const Point& p) {
 
 Unit& Army::getFurthestUnit(const Point& p) {
 	Unit* currentUnit;
-	Unit* currentFurthestUnit = new Unit(10);	
-	// I assume p(999,999) is pretty far
-	currentFurthestUnit->setPosition(Point(999,999));
+	Unit* currentFurthestUnit = nullptr;
 	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
+		if (currentFurthestUnit == nullptr) currentFurthestUnit = *it;
 		currentUnit = *it;
 		if (currentUnit->getPosition().distance(p) > currentFurthestUnit->getPosition().distance(p)){
 			currentFurthestUnit = currentUnit;
@@ -69,10 +69,11 @@ Unit& Army::getHighestUnit(int capa_index){
 
 void Army::purge(){
 	Unit* currentUnit;
-	for (std::vector<Unit*>::iterator it = _unitList.begin(); it != _unitList.end(); ++it) {
+	std::vector<Unit*> copy = _unitList;
+	for (std::vector<Unit*>::iterator it = copy.begin(); it != copy.end(); ++it) {
 		currentUnit = *it;
 		if (!currentUnit->isAlive()){
-			_unitList.erase(it);
+			_unitList.erase(std::remove(_unitList.begin(), _unitList.end(), *it), _unitList.end());
 		}
 		else
 		{
