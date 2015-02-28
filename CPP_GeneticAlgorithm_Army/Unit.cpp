@@ -25,7 +25,18 @@ Unit::Unit(IACode iaCode, std::vector<int> levels)
 	_id = ++_idCounter;
 }
 
-
+Unit::Unit(const Unit& unitToCopy){
+	_id = unitToCopy._id;
+	_armor = unitToCopy._armor;
+	_damage = unitToCopy._damage;
+	_health = unitToCopy._health;
+	_healthRegen = unitToCopy._healthRegen;
+	_range = unitToCopy._range;
+	_speed = unitToCopy._speed;
+	_weaponSpeed = unitToCopy._weaponSpeed;
+	_position = unitToCopy._position;
+	_iaCode = unitToCopy._iaCode;
+}
 
 Unit::~Unit()
 {

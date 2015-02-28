@@ -13,13 +13,28 @@ Army::Army(int numberOfUnits, int level){
 		Unit* newUnit = new Unit(level);
 		_unitList.push_back(newUnit);
 	}
+	//_score = _unitList.size();
 	_id = ++_idCounter;
+	_score = 0;
 }
 
 // Vérifier si on peut bien passer ca par référence
 Army::Army(std::vector<Unit*>& unitList){
 	_unitList = unitList;
+	//_score = _unitList.size();
 	_id = ++_idCounter;
+	_score = 0;
+}
+
+Army::Army(const Army& armyToCopy){
+	_id = armyToCopy.getId();
+	Unit* current;
+	//std::copy(armyToCopy._unitList.begin(), armyToCopy._unitList.begin(), _unitList.begin());
+	for (std::vector<Unit*>::const_iterator it = armyToCopy._unitList.begin(); it != armyToCopy._unitList.end(); ++it) {
+		current = *it;
+		_unitList.push_back(new Unit(*current));
+	}
+	_score = armyToCopy._score;
 }
 
 Unit& Army::getNearestUnit(const Point& p) const{

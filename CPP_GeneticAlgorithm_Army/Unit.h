@@ -18,6 +18,7 @@ public:
 	static int _idCounter;
 	Unit(int globalLevel);
 	Unit(IACode iaCode, std::vector<int> levels);
+	Unit(const Unit& unit);
 	~Unit();
 
 	const Cap_Armor& getArmor()const { return _armor; };
