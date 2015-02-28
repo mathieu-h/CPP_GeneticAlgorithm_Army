@@ -38,6 +38,10 @@ public:
 		return _unitList.size();
 	}
 
+	int getScore() const{ 
+		return _unitList.size();
+	}
+
 	bool isEmpty(){
 		return _unitList.size() == 0;
 	}
@@ -45,7 +49,30 @@ public:
 	void purge();
 	void refreshUnits();
 	void saveArmy();
+
+	
 private:
 	std::vector<Unit*> _unitList;
 };
 
+inline bool operator<(const Army& army1, const Army& army2){
+	if (army1.getScore() < army2.getScore()){
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+inline bool operator>(const Army& army1, const Army& army2){ return army2 < army1; }
+inline bool operator<=(const Army& army1, const Army& army2){ return !(army1>army2); }
+inline bool operator>=(const Army& army1, const Army& army2){ return !(army2>army1); }
+
+inline bool operator==(const Army& sol1, const Army& sol2){
+	if (sol1.getScore() == sol2.getScore()){
+		return true;
+	}
+	return false;
+}
+inline bool operator!=(const Army& sol1, const Army& sol2){ return !(sol1 == sol2); }
