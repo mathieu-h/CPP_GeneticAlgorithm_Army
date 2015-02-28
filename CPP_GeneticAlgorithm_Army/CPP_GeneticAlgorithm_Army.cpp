@@ -113,6 +113,9 @@ int _tmain(int argc, _TCHAR* argv[])
 			newArmies.push_back(*(armies[j] * armies[rand() % nbArmies_N]));
 			newArmies.push_back(Army(numberOfUnits_X, levelUnits_Y));
 		}
+		for (int k = 0; k < newArmies.size(); ++k){
+			newArmies.at(k).setScore(0);
+		}
 		armies = newArmies;
 		/*
 		On créé notre nouvelle génération d’armées(qui remplacera la génération courante) de la façon suivante :
