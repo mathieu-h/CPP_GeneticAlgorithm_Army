@@ -8,6 +8,7 @@
 class Army
 {
 public:
+	static int _idCounter;
 	Army(int numberOfUnits, int level);
 	Army(std::vector<Unit*>& unitList);
 	~Army();
@@ -42,6 +43,10 @@ public:
 		return _unitList.size();
 	}
 
+	int getId() const{
+		return _id;
+	}
+
 	bool isEmpty(){
 		return _unitList.size() == 0;
 	}
@@ -53,6 +58,7 @@ public:
 	
 private:
 	std::vector<Unit*> _unitList;
+	int _id;
 };
 
 inline bool operator<(const Army& army1, const Army& army2){

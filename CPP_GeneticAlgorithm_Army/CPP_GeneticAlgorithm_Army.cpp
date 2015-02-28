@@ -13,6 +13,7 @@
 #include <algorithm>
 
 int Unit::_idCounter = 0;
+int Army::_idCounter = 0;
 #define A1 1
 #define A2 2
 
@@ -69,9 +70,9 @@ std::vector<int> battleArmy(Army& first_army, Army& sec_army){
 int _tmain(int argc, _TCHAR* argv[])
 {
 	std::srand(std::time(NULL));
-	Army first_army = Army(5, 100);
-	Army sec_army = Army(5, 100);
-	std::vector<int> scores = battleArmy(first_army, sec_army);
+	//Army first_army = Army(5, 100);
+	//Army sec_army = Army(5, 100);
+	//std::vector<int> scores = battleArmy(first_army, sec_army);
 	//std::cout << "Le score de l'armee 1 est de : " << scores.at(0) << std::endl;
 	//std::cout << "Le score de l'armee 2 est de : " << scores.at(1) << std::endl;
 
@@ -79,25 +80,42 @@ int _tmain(int argc, _TCHAR* argv[])
 	int numberOfUnits_X = 5;
 	int levelUnits_Y = 100;
 	int nbIteration_I = 10;
+	// doit être inférieur a N-1 * nombre d'unités
+	int scoreToReach_T = 7;
+	
 	std::vector<Army> armies = std::vector<Army>();
 	for (int i = 0; i < nbArmies_N; ++i){
 		armies.push_back(Army(numberOfUnits_X, levelUnits_Y));
 	}
-	/*
+	
 	for (int i = 0; i < nbIteration_I; ++i) {
-		for (std::vector<Army>::iterator it = armies.begin(); it != armies.end(); ++it) {
-			for (std::vector<Army>::iterator it_opp = armies.begin(); it != armies.end(); ++it){
-				// copy it, copy it_opp
-				//make it fight against it_opp
-				// how to resolve the fact that it mustnt fight against itself ? (std::remove, id on army)
+		std::vector<Army> armies_copy = armies;
+		for (std::vector<Army>::iterator it = armies_copy.begin(); it != armies_copy.end(); ++it) {			
+			std::vector<Army> armies_copy_2 = armies;
+			for (std::vector<Army>::iterator it_opp = armies_copy_2.begin(); it_opp != armies_copy_2.end(); ++it_opp){
+				// how to resolve the fact that it mustnt fight against itself ( id on army)
+				Army first_army = *it;
+				Army sec_army = *it_opp;
+				if (sec_army.getId() == first_army.getId()) continue;
+				std::vector<int> scores = battleArmy(first_army, sec_army);
 			}
 		}
-		//std::sort(armies.begin(), armies.end());
-
-	}*/
-
+		// On sort la liste d'armée
+		std::sort(armies.begin(), armies.end());
+		if (armies.at(0).getScore() > scoreToReach_T){
+			break;
+		}
+		/*
+		On créé notre nouvelle génération d’armées(qui remplacera la génération courante) de la façon suivante :
+				i.on garde les(N*0.1) meilleures armées
+				ii.on prend un croisement issu de chacune des(N*0.3) meilleures armées avec une autre prise aléatoirement
+				iii.on prend une mutation de chacune des(N*0.3) meilleures armées
+				iv.on génère(N*0.3) nouvelles armées aléatoirement
+		*/
+	}
+	//On save l'armée à l'indice 0 de armies
 	//first_army.saveArmy();
-
+	
 	getchar();
 	return 0;
 }

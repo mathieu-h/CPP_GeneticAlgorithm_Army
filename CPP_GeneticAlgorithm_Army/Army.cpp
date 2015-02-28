@@ -13,11 +13,13 @@ Army::Army(int numberOfUnits, int level){
 		Unit* newUnit = new Unit(level);
 		_unitList.push_back(newUnit);
 	}
+	_id = ++_idCounter;
 }
 
 // Vérifier si on peut bien passer ca par référence
 Army::Army(std::vector<Unit*>& unitList){
 	_unitList = unitList;
+	_id = ++_idCounter;
 }
 
 Unit& Army::getNearestUnit(const Point& p) const{
